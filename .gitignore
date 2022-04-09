@@ -7,4 +7,7 @@ src/job2/IPTV/config.py
 src/job2/IPTV/preprocess.py
 src/job3/TOTAL/config.py
 src/job3/TOTAL/preprocess.py
+src/job1/dist/*
+src/job2/dist/*
+src/job3/dist/*
 
