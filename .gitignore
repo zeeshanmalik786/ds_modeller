@@ -1,10 +1,10 @@
 .idea/
 src/preprocessor
 src/config
-src/job1/RHSI/config
-src/job1/RHSI/preprocess
-src/job2/IPTV/config
-src/job2/IPTV/preprocess
-src/job3/TOTAL/config
-src/job3/TOTAL/preprocess
+src/job1/RHSI/config.py
+src/job1/RHSI/preprocess.py
+src/job2/IPTV/config.py
+src/job2/IPTV/preprocess.py
+src/job3/TOTAL/config.py
+src/job3/TOTAL/preprocess.py
 
