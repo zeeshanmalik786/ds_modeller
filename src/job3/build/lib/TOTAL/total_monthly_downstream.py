@@ -76,7 +76,7 @@ class TOTAL:
                    "current_md_util_mbps",
                    "current_ct_fwds_in_md",
                    "total_rhsi_only_subs_ium",
-                   "iptv_throughput_by_phub",
+                   "iptv_throughput",
                    "md_perc_of_site",
                    "md_iptv_sub_impact_mbps",
                    "iptv_perc_of_total_cap",

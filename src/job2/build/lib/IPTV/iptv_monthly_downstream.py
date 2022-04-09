@@ -69,27 +69,27 @@ class IPTV:
         utilization_per_phub = self.obj.get_data("default.ds_modeller_down_byte_daily_RHSI_Approximation", ["PHUB",
                                                                                                    "cmts_host_name",
                                                                                                    "MAC_DOMAIN",
-                                                                                                   "iptv_throughput_by_phub"]). \
-            withColumnRenamed("iptv_throughput_by_phub", "utilization_per_phub")
+                                                                                                   "iptv_throughput"]). \
+            withColumnRenamed("iptv_throughput", "utilization_per_macdomain")
 
         sum_of_cm_df_with_util = self.obj.join_two_frames(sum_of_cm_df, utilization_per_phub, "inner",
                                                  ["PHUB", "cmts_host_name", "MAC_DOMAIN"])
         # withColumn("utilization_per_phub", func.when(col("utilization_per_phub").cast(DoubleType())>=7.0, 7.17).otherwise(col("utilization_per_phub")))
 
         sum_of_cm_df_with_util = sum_of_cm_df_with_util.withColumn("add_mbps_approx_month_1", round(
-            col("add_sub_per_phub_1") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_2", round(col("add_sub_per_phub_2") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_3", round(col("add_sub_per_phub_3") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_4", round(col("add_sub_per_phub_4") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_5", round(col("add_sub_per_phub_5") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_6", round(col("add_sub_per_phub_6") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_7", round(col("add_sub_per_phub_7") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_8", round(col("add_sub_per_phub_8") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_9", round(col("add_sub_per_phub_9") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_10", round(col("add_sub_per_phub_10") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_11", round(col("add_sub_per_phub_11") * col("utilization_per_phub"), 2)). \
-            withColumn("add_mbps_approx_month_12", round(col("add_sub_per_phub_12") * col("utilization_per_phub"), 2)). \
-            withColumn("utilization_per_phub", col("utilization_per_phub").cast(DoubleType()))
+            col("add_sub_per_phub_1") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_2", round(col("add_sub_per_phub_2") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_3", round(col("add_sub_per_phub_3") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_4", round(col("add_sub_per_phub_4") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_5", round(col("add_sub_per_phub_5") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_6", round(col("add_sub_per_phub_6") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_7", round(col("add_sub_per_phub_7") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_8", round(col("add_sub_per_phub_8") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_9", round(col("add_sub_per_phub_9") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_10", round(col("add_sub_per_phub_10") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_11", round(col("add_sub_per_phub_11") * col("utilization_per_macdomain"), 2)). \
+            withColumn("add_mbps_approx_month_12", round(col("add_sub_per_phub_12") * col("utilization_per_macdomain"), 2)). \
+            withColumn("utilization_per_macdomain", col("utilization_per_macdomain").cast(DoubleType()))
 
         self.spark.sql("DROP TABLE IF EXISTS default.ds_modeller_ignite_tv_forecast")
         sum_of_cm_df_with_util.write.saveAsTable("default.ds_modeller_ignite_tv_forecast")
