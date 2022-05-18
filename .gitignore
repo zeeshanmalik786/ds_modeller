@@ -10,4 +10,8 @@ src/job3/TOTAL/preprocess.py
 src/job1/dist/*
 src/job2/dist/*
 src/job3/dist/*
-
+src/job4/HFC.egg-info/
+src/job4/build/
+src/job4/dist/
+src/job4/HFC/preprocess.py
+src/job4/HFC/config.py
